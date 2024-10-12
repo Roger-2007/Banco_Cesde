@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco Futuro</title>
+    <link rel="shortcut icon" href="img/BancoFuturo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/registrarse.css">
+</head>
+
+<body>
+    <nav>
+        <a href="index.html"><img src="img/BancoFuturoLetra.png" alt="BancoFuturoLetra"></a>
+
+        <div class="botonesnav">
+            <a href="iniciarsesion.html" id="acceder">Acceder</a>
+
+        </div>
+    </nav>
+    <main>
+
+        <div class="registro">
+            <div class="container">
+                <div class="cuadroRegistro">
+                    <form action="perfil.html">
+                        <img src="img/BancoFuturoLetra.png" alt="BancoFuturo">
+                        <div class="doble">
+                            <div class="iz">
+                                <label for="nombre">Nombres</label>
+                                <input type="text" name="nom" id="nombre" required>
+                            </div>
+                            <div class="der">
+                                <label for="apellido">Apellidos</label>
+                                <input type="text" name="ape" id="apellido" required>
+                            </div>
+
+                        </div>
+
+
+
+                        <label for="correo">Correo</label>
+                        <input type="email" name="corr" id="correo" required>
+
+                        <!--  <label for="usuario">Nombre de usuario</label>
+                        <input type="text" name="usu" id="usuario" required> -->
+
+                        <div class="doble">
+                            <div class="iz">
+                                <label for="contraseña">Contraseña</label>
+                                <input type="password" name="contra" id="contraseña" minlength="8" required>
+                            </div>
+
+                            <div class="der">
+                                <label for="telefono">Numero de telefono</label>
+                                <input type="tel" name="telef" id="telefono" maxlength="11" required>
+                            </div>
+
+                        </div>
+
+
+
+                        <label for="direccion">Direccion</label>
+                        <input type="text" name="direc" id="direccion" required>
+                        <label for="identificacion">Numero de identificacion</label>
+                        <input type="number" name="ident" id="identificacion">
+
+                        <div class="radio">
+                            <div class="ahorros">
+                                <input type="radio" name="tipoCuenta" id="ahorros" required> 
+
+                                <label for="ahorros">Ahorros</label>
+                            </div>
+                            <div class="corriente">
+                                <input type="radio" name="tipoCuenta" id="corriente" required>
+
+                                <label for="corriente">Corriente</label>
+                            </div>
+
+
+
+                        </div>
+
+                        <!--  <label for="nacimiento">Fecha de nacimiento</label>
+                        <input type="date" name="fecha" id="nacimiento" max="2006-12-31" required> -->
+                        <!--                         <input type="button" id="crearcuenta" value="Crear cuenta">-->
+                        <input type="submit" id="crearcuenta" value="Crear cuenta">
+
+
+
+                    </form>
+                </div>
+
+            </div>
+            <div class="imagen">
+                <img src="img/file (1) (1).png" alt="MujerTelefonoRegistro">
+
+            </div>
+        </div>
+
+    </main>
+    <footer>
+        <img src="img/BancoFuturoLetra.png" alt="BancoFuturoLetra">
+        <small>&copy;2024 <b>Roger Arenas</b> - Todos los Derechos Reservados.</small>
+
+    </footer>
+</body>
+
+</html>

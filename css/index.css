@@ -1,0 +1,166 @@
+:root {
+    --color_principal: #2528F0;
+    --color_secundario: #F6F6F6;
+    --color_fuente: #373737;
+}
+
+
+/* Contenido */
+
+.content {
+    margin-top: 4.375rem;
+    background-color: var(--color_secundario);
+    display: flex;
+    width: 100%;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+
+
+.content .textoContent {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: center;
+    padding: 5rem;
+    gap: 1.25rem 0;
+    align-items: center;
+}
+
+
+.textoContent h2 {
+    font-size: 2.5rem;
+}
+
+.textoContent p {
+    font-size: 1.25rem;
+}
+
+.textoContent h2,
+p {
+    color: var(--color_fuente);
+}
+
+.textoContent .btnRegistrarse {
+    justify-content: center;
+}
+
+.content .imagenContent {
+    margin: 0 auto;
+    width: 50%;
+    padding: 1.25rem;
+}
+
+
+.content .imagenContent img {
+    width: 80%;
+}
+
+.beneficios {
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem 0;
+    font-size: 1.25rem;
+    color: var(--color_fuente);
+}
+
+.beneficiosContainer {
+    width: 40%;
+    border: 1px solid black;
+    border-radius: 20px;
+    display: flex;
+    padding: 1.25rem 2.5rem;
+    justify-content: space-between;
+
+
+}
+
+.beneficiosContainer .beneficiosCard {
+    text-align: center;
+    font-size: 1.1875rem;
+}
+
+.beneficiosCard img {
+    max-width: auto;
+}
+
+.beneficiosCard p {
+    color: black;
+}
+
+
+/* Ayuda */
+
+.ayuda {
+    margin-top: 6.25rem;
+    text-align: center;
+}
+
+.ayudaContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 0 5rem;
+    margin-top: 10vh;
+}
+
+.ayudaContainer .ayudaCard {
+    width: fit-content;
+    display: flex;
+    background-color: var(--color_secundario);
+    flex-direction: column;
+    border-radius: .625rem;
+    padding: 1.25rem;
+    text-align: center;
+    align-items: center;
+}
+
+.ayudaCard img {
+    width: auto;
+}
+
+.ayudaCard a {
+    color: black;
+    font-size: 1.25rem;
+}
+
+
+
+
+@media screen and (min-width:1601px) and (max-width:1921px) {
+    html {
+        font-size: 24px;
+    }
+}
+
+@media screen and (min-width:1367px) and (max-width:1601px) {
+    html {
+        font-size: 21px;
+    }
+}
+
+@media screen and (max-width:1000px) {
+    .content {
+        flex-direction: column;
+    }
+
+    .content .textoContent {
+        width: 100%;
+    }
+
+    .content .imagenContent {
+        display: none;
+    }
+}
+
+
+@media screen and (max-width:900px) {
+    
+    .beneficiosContainer {
+        flex-direction: column;
+        width: fit-content;
+    }
+}

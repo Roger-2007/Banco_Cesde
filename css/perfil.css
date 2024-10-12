@@ -1,0 +1,261 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --color_principal: #2528F0;
+    --color_secundario: #F6F6F6;
+    --color_fuente: #373737;
+}
+
+main {
+    background-color: var(--color_secundario);
+}
+
+nav {
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: .125rem 3.75rem;
+
+}
+
+
+nav .botonesnav {
+    display: flex;
+    flex-direction: row;
+    gap: 0 1.875rem;
+    align-items: center;
+    font-size: 1.125rem;
+}
+
+.botonesnav a {
+    text-decoration: none;
+    color: var(--color_principal);
+}
+
+
+
+nav #cerrarsesion:hover {
+    text-decoration: underline;
+}
+
+
+/* Pagina */
+
+.perfil h1 {
+    padding-top: 10px;
+}
+
+.divisiones {
+    display: flex;
+    width: 100%;
+    padding: 40px 0;
+
+}
+
+
+.divisiones .ladoIzquierdo {
+    width: 55%;
+    display: flex;
+
+}
+
+.ladoIzquierdo .dinero {
+    margin: 0 auto;
+    width: 60%;
+    background-color: white;
+    border: 1px solid rgb(202, 202, 202);
+    border-radius: 10px;
+    padding: 20px 40px;
+    height: fit-content;
+}
+
+.dinero h2 {
+    font-size: 22px;
+    color: var(--color_fuente);
+}
+
+/* .dinero h3 {
+    font-size: 40px;
+    margin: 10px 0;
+} */
+.dinero label {
+
+    font-size: 44px;
+    margin: 10px 0;
+
+}
+
+.dinero h4 {
+    font-size: 17px;
+}
+
+
+.dinero .btnContainer {
+    display: flex;
+    margin: 20px 0;
+    gap: 0 30px;
+}
+
+/* .btnContainer .btn{
+width: fit-content;
+padding: 8px 20px;
+background-color: #2528F0;
+color: white;
+border-radius: 20px;
+} */
+
+/* 
+.btnContainer .btn:hover{
+        background-color: #000280;
+        transition: all .5s;
+        cursor: pointer;
+    }
+*/
+
+.btnContainer input {
+    width: fit-content;
+    padding: 8px 20px;
+    background-color: #2528F0;
+    color: white;
+    border-radius: 20px;
+    border: 0;
+}
+
+.btnContainer input:hover {
+    background-color: #000280;
+    transition: all .5s;
+    cursor: pointer;
+}
+
+.ladoDerecho {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px 0;
+}
+
+.ladoDerecho .acciones {
+    width: 80%;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px 40px;
+}
+
+.btnAcciones {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.btnAcciones input {
+    width: 40%;
+     padding: 12px 0;
+    font-size: 19px;
+    background-color: #2528F0;
+    color: white;
+    border-radius: 25px;
+    border: 0;
+}
+
+.btnAcciones input:hover {
+    background-color: #000280;
+    transition: all .5s;
+    cursor: pointer;
+}
+
+.movimiento {
+    width: 80%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    padding: 20px 40px;
+    gap: 20px 0;
+}
+
+.movimiento .btnMovimiento input {
+    margin: 0 auto;
+    width: fit-content;
+    padding: 8px 23px;
+    font-size: 16px;
+    background-color: #2528F0;
+    color: white;
+    border-radius: 25px;
+    border: 0;
+}
+
+.btnMovimiento input:hover {
+    background-color: #000280;
+    transition: all .5s;
+    cursor: pointer;
+}
+
+
+
+footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    background-color: white;
+    margin-top: 5rem;
+    display: flex;
+    padding: 0 2.5rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+@media screen and (min-width:1601px) and (max-width:1921px) {
+    html {
+        font-size: 24px;
+    }
+}
+
+@media screen and (min-width:1367px) and (max-width:1601px) {
+    html {
+        font-size: 21px;
+    }
+}
+
+@media screen and (max-width:1000px) {
+    .perfil{
+        display: flex;
+    }
+    .divisiones {
+        flex-direction: column;
+justify-content: center;    
+align-items: center;
+margin: 0 auto;
+}
+
+    .ladoIzquierdo{
+        width: 100%;
+    }
+    .ladoDerecho{
+        width: 100%;
+    }
+
+   .movimiento{
+    width: 70%;
+    margin: 0 auto;
+   }
+   .acciones{
+    width: 70%;
+    margin: 0 auto;
+   }
+   .dinero{
+    width: 70%;
+    margin: 0 auto;
+   }
+}
+
+@media screen and (max-width:900px) {
+
+    footer {
+        flex-direction: column;
+    }
+}
