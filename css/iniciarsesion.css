@@ -53,13 +53,13 @@ form input{
     transition: all .5s;
     cursor: pointer;
 }
-@media screen and (min-width:1601px) and (max-width:1921px) {
+@media screen and (min-width:1681px) and (max-width:1921px) {
     html {
         font-size: 24px;
     }
 }
 
-@media screen and (min-width:1367px) and (max-width:1601px) {
+@media screen and (min-width:1367px) and (max-width:1681px) {
     html {
         font-size: 21px;
     }
