@@ -29,7 +29,7 @@ nav .botonesnav {
     flex-direction: row;
     gap: 0 1.875rem;
     align-items: center;
-    font-size: 1.125rem;
+    font-size: 18px;
 }
 
 .botonesnav a {
@@ -132,6 +132,26 @@ border-radius: 20px;
     cursor: pointer;
 }
 
+.dinero #formRetirar{
+    display: flex;
+    flex-direction: column;
+    
+}
+.dinero #formRetirar label{
+    font-size: 1.625rem;
+    
+}
+.dinero #formRetirar input{
+    width: 50%;   
+height: 35px;
+margin-bottom: .3125rem;
+background-color: #ebe9e9;
+border-radius: 5px;
+border: .5px solid black;
+
+}
+
+
 .ladoDerecho {
     width: 45%;
     display: flex;
@@ -145,11 +165,38 @@ border-radius: 20px;
     border-radius: 10px;
     padding: 20px 40px;
 }
-
+.acciones{
+    height: auto;
+}
+.acciones .opcionestransferir-depositar{
+    margin: 20px;
+    color: var(--color_fuente);
+    min-height: fit-content;
+    font-size: 30px;
+}
+#formDepositar{
+    display: none;
+    gap: 20px 0;
+    flex-direction: column;
+}
+#formTransferir{
+    display: none;
+    gap: 20px 0;
+    flex-direction: column;
+}
+#formDepositar input{
+width: 50%;
+    height: 30px;
+}
+#formTransferir input{
+    width: 50%;
+    height: 30px;   
+}
 .btnAcciones {
     display: flex;
     justify-content: space-evenly;
 }
+
 
 .btnAcciones input {
     width: 40%;
@@ -213,43 +260,46 @@ footer {
     html {
         font-size: 24px;
     }
-}
-
-@media screen and (min-width:1367px) and (max-width:1601px) {
-    html {
+    nav{
         font-size: 21px;
     }
 }
 
-@media screen and (max-width:1000px) {
-    .perfil{
-        display: flex;
+@media screen and (min-width:1367px) and (max-width:1601px) {
+    html {
+        font-size: 20px;
     }
-    .divisiones {
-        flex-direction: column;
-justify-content: center;    
-align-items: center;
-margin: 0 auto;
+    nav{
+        font-size: 20px;
+    }
 }
 
-    .ladoIzquierdo{
+@media screen and (max-width:1000px) {
+   
+    .divisiones {
+       width: 100%;
+        flex-direction: column;
+        gap: 20px 0;
+align-items: center;
+}
+
+    .ladoIzquierdo,.ladoDerecho{
         width: 100%;
     }
-    .ladoDerecho{
+    /* .ladoDerecho{
         width: 100%;
-    }
+    } */
 
    .movimiento{
-    width: 70%;
+    width: 100%;
     margin: 0 auto;
    }
    .acciones{
-    width: 70%;
+    min-width: 100%;
     margin: 0 auto;
    }
    .dinero{
-    width: 70%;
-    margin: 0 auto;
+    min-width: fit-content;
    }
 }
 

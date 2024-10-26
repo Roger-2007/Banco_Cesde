@@ -12,8 +12,11 @@
 
 }
 .container {
-   align-content: center;
+   display: flex;
     width: 45%;
+align-items: center;
+justify-content: center;
+
 }
  .container .cuadroRegistro form{
     background-color: white;

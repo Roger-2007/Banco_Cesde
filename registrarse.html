@@ -24,12 +24,12 @@
         <div class="registro">
             <div class="container">
                 <div class="cuadroRegistro">
-                    <form action="perfil.html">
+                    <form id="formRegistro" >
                         <img src="img/BancoFuturoLetra.png" alt="BancoFuturo">
                         <div class="doble">
                             <div class="iz">
                                 <label for="nombre">Nombres</label>
-                                <input type="text" name="nom" id="nombre" required>
+                                <input type="text" name="nom" id="nombre" on required>
                             </div>
                             <div class="der">
                                 <label for="apellido">Apellidos</label>
@@ -64,7 +64,7 @@
                         <label for="direccion">Direccion</label>
                         <input type="text" name="direc" id="direccion" required>
                         <label for="identificacion">Numero de identificacion</label>
-                        <input type="number" name="ident" id="identificacion">
+                        <input type="number" name="ident" id="identificacion" required>
 
                         <div class="radio">
                             <div class="ahorros">
@@ -105,6 +105,7 @@
         <small>&copy;2024 <b>Roger Arenas</b> - Todos los Derechos Reservados.</small>
 
     </footer>
+<script type="module" src="./js/main.js"></script>
 </body>
 
 </html>

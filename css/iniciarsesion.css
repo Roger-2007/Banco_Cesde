@@ -12,7 +12,8 @@ margin-bottom: 8.75rem;
 display: flex;
 align-items: center;
 align-content: center;
-}
+/* margin-bottom: 12.5rem;
+ */}
 
 form{
     background-color: white;
@@ -53,6 +54,7 @@ form input{
     transition: all .5s;
     cursor: pointer;
 }
+
 @media screen and (min-width:1681px) and (max-width:1921px) {
     html {
         font-size: 24px;

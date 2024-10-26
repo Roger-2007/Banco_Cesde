@@ -18,6 +18,7 @@ nav {
     padding: .125rem 3.75rem;
     position: fixed;
     top: 0;
+    font-size: 1.125rem;
 
 }
 
@@ -27,7 +28,6 @@ nav .botonesnav {
     flex-direction: row;
     gap: 0 1.875rem;
     align-items: center;
-    font-size: 1.125rem;
 }
 
 .botonesnav a {
@@ -40,7 +40,6 @@ nav .botonesnav {
     background-color: var(--color_principal);
     padding: .625rem;
     border-radius: 15px;
-    font-size: 1.125rem;
 
 }
 
@@ -69,14 +68,14 @@ footer {
 
 
 @media screen and (min-width:1601px) and (max-width:1921px) {
-    html {
-        font-size: 24px;
+    nav {
+        font-size: 20px;
     }
 }
 
 @media screen and (min-width:1367px) and (max-width:1601px){
-    html{
-        font-size:21px;
+    nav{
+        font-size:19px;
     }
 }
 
