@@ -54,6 +54,7 @@ nav #cerrarsesion:hover {
     display: flex;
     width: 100%;
     padding: 40px 0;
+    margin-bottom:100px;
 
 }
 
@@ -133,21 +134,19 @@ border-radius: 20px;
 }
 
 .dinero #formRetirar{
-    display: flex;
+    display: none;
     flex-direction: column;
-    
+  
 }
 .dinero #formRetirar label{
-    font-size: 1.625rem;
-    
+    color: var(--color_fuente);
+          font-size: 1.25rem;
+
 }
 .dinero #formRetirar input{
     width: 50%;   
-height: 35px;
+height: 30px;
 margin-bottom: .3125rem;
-background-color: #ebe9e9;
-border-radius: 5px;
-border: .5px solid black;
 
 }
 
@@ -188,9 +187,34 @@ border: .5px solid black;
 width: 50%;
     height: 30px;
 }
+
 #formTransferir input{
     width: 50%;
     height: 30px;   
+}
+#formTransferir .estiloBoton{
+  background-color: var(--color_principal); 
+  border: 0;
+  width: fit-content;
+  padding: 0 20px; 
+  border-radius: 20px;
+  color: white;
+}
+#formRetirar .estiloBoton{
+  background-color: var(--color_principal); 
+  border: 0;
+  width: fit-content;
+  padding: 0 20px; 
+  border-radius: 20px;
+  color: white;
+}
+#formDepositar .estiloBoton{
+  background-color: var(--color_principal); 
+  border: 0;
+  width: fit-content;
+  padding: 0 20px; 
+  border-radius: 20px;
+  color: white;
 }
 .btnAcciones {
     display: flex;

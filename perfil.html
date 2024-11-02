@@ -14,8 +14,9 @@
         <a href="perfil.html"><img src="img/BancoFuturoLetra.png" alt="BancoFuturoLetra"></a>
 
         <div class="botonesnav">
+            <a href="modificarPerfil.html" id="modificarPerfil">Modificar perfil</a>
             <a href="index.html" id="cerrarsesion">Cerrar sesión</a>
-        </div>
+
     </nav>
 
     <main>
@@ -49,12 +50,12 @@
                             <p>Retirar</p>
                         </div> -->
                         </div>
-                       
-                        <form action="" id="formRetirar"  >
+
+                        <form action="" id="formRetirar">
                             <hr>
                             <label for="cantRetirar">Cuanto quiere retirar?</label>
-                            <input type="number" name="cantRetirar" id="cantRetirar">
-                            <input type="submit" value="Aceptar">
+                            <input type="number" name="cantRetirar" id="cantRetirar" min="50" required>
+                            <input type="submit" value="Aceptar" class="estiloBoton">
                         </form>
                     </div>
 
@@ -75,25 +76,26 @@
 
                         <div class="opcionestransferir-depositar">
                             <form action="" id="formDepositar">
+                                <hr>
                                 <label for="">Cuanto quiere depositar</label>
-                                <input type="number" id="cantDepositar">
-                                <input type="submit" value="Aceptar">
+                                <input type="number" id="cantDepositar" min="50" required>
+                                <input type="submit" value="Aceptar" class="estiloBoton">
                             </form>
                             <form action="" id="formTransferir">
+                                <hr>
                                 <label for="">A quien quiere transferir</label>
-                                <input type="text" id="personaTransferir">
+                                <input type="text" id="personaTransferir" required>
                                 <label for="">Cuanto quiere transferir</label>
-                                <input type="number" id="cantTransferir">
-                                <input type="submit" value="Aceptar">
+                                <input type="number" id="cantTransferir" min="50" required>
+                                <input type="submit" value="Aceptar" class="estiloBoton">
                             </form>
                         </div>
                     </div>
                     <div class="movimiento">
                         <h2>Movimientos</h2>
-
-                        <label for="">No hay nada para mostrar</label>
+                        <label id="mostrarDatosMovimiento">No hay nada para mostrar</label>
                         <div class="btnMovimiento">
-                            <input type="button" value="Mostrar movimientos">
+                            <input type="button" value="Mostrar movimientos" id="btnMostrarMovimiento">
                         </div>
 
                     </div>

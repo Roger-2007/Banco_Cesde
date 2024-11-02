@@ -1,4 +1,4 @@
-/* número de cuenta, saldo. Métodos: consultar saldo, realizar depósito, 
+/* Cuenta: Atributos: número de cuenta, saldo. Métodos: consultar saldo, realizar depósito, 
 realizar retiro. */
 class Cuenta{
 constructor(saldo=0,numeroCuenta=0){
@@ -14,10 +14,16 @@ consultarSaldo(){
 realizarDeposito(saldoDepositar){
 
 
-    this.saldo=+saldoDepositar
+    this.saldo+=saldoDepositar
 }
-realizarRetiro(saldoRetirar){
-if(saldoRetirar<=this.saldo)
-this.saldo=-saldoRetirar
+realizarRetiro(saldoRetirar,saldoActual){
+if(saldoRetirar<=saldoActual)
+this.saldo=saldoActual-saldoRetirar
+else{
+    alert("Usted no posee la cantidad que trata de retirar")
+    this.saldo=saldoActual
 }
+return this.saldo
+}
+
 }export default Cuenta
