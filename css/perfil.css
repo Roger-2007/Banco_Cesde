@@ -117,6 +117,13 @@ border-radius: 20px;
         cursor: pointer;
     }
 */
+/* .usuario{
+    display: flex;
+    align-items: center;
+}
+.usuario h1{
+} */
+
 
 .btnContainer input {
     width: fit-content;

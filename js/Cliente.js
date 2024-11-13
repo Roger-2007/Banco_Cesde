@@ -1,9 +1,12 @@
 class Cliente{
-constructor (nombre,apellido,direccion,identificacion){
+constructor (nombre,apellido,correo,direccion,contraseña,identificacion,telefono){
 this.nombre=nombre
 this.apellido=apellido
+this.correo=correo
 this.direccion=direccion
+this.contraseña=contraseña
 this.identificacion=identificacion
+this.telefono=telefono
 }
 
 actualizarDatos(nombre,apellido,correo,direccion,contraseña,identificacion,telefono){
@@ -21,7 +24,9 @@ if(identificacion)
 this.identificacion=identificacion
 if(telefono)
     this.telefono=telefono
-return nuevosDatos=[this.nombre,this.apellido,this.correo,this.direccion,this.contraseña,this.identificacion,this.telefono]
+return [this.nombre,this.apellido, this.correo,this.direccion,this.contraseña ,this.identificacion,this.telefono] /*
+return {nombre:this.nombre,apellido:this.apellido,correo:this.correo,direccion:this.direccion,contraseña:this.contraseña,identificacion:this.identificacion,telefono:this.telefono}
+ */
 
 
 }

@@ -1,0 +1,112 @@
+:root {
+    --color_principal: #2528F0;
+    --color_secundario: #F6F6F6;
+    --color_fuente: #373737;
+}
+html{
+    background-color: var(--color_secundario);
+}
+.iniciarsesion{
+margin-top: 10rem;
+margin-bottom: 8.75rem;
+display: flex;
+align-items: center;
+align-content: center;
+/* margin-bottom: 12.5rem;
+ */}
+
+ .container{
+    background-color: white;
+    padding: .625rem;
+   max-width: fit-content;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 200px auto;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.125rem;
+    box-shadow: black 0 2px 3px 0;
+}
+.container #gestorCuenta{
+    margin: 20px 0;
+    display: flex;
+
+    justify-content: center;
+flex-direction: column;
+}
+.container #gestorCuenta button{
+    margin: 4px 0;
+    max-width: 550px;
+    font-size: 20px;
+    background-color: var(--color_principal);
+    color: white;
+    border: 1px solid black;
+border-radius: 2px;
+}
+#gestorCuenta button:hover{
+    color: black;
+    background-color: white;
+    transition: all 0.2s;
+}
+
+#crearCuenta{
+   margin: 0 auto;
+    width: fit-content;
+    padding: 5px 20px;
+    font-size: 20px;
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+    border: 1px black solid;
+}
+#crearCuenta:hover{
+    background-color: rgb(52, 170, 52);
+    transition: all 0.2s;
+}
+#botonesCrearCuenta{
+    display: none;
+    gap: 0 20px;
+    justify-content: center;
+}
+
+#botonesCrearCuenta button{
+    margin-top: 20px;
+    background-color:chocolate;
+    font-size: 18px;
+    width: fit-content;
+    padding: 5px 10px;
+    color: white;
+    border: 1px black solid;
+    border-radius: 5px;
+    
+}
+#botonesCrearCuenta button:HOVER{
+    background-color:rgb(223, 129, 62);
+    transition: all .2s;
+    
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+@media screen and (min-width:1681px) and (max-width:1921px) {
+    html {
+        font-size: 24px;
+    }
+}
+
+@media screen and (min-width:1367px) and (max-width:1681px) {
+    html {
+        font-size: 21px;
+    }
+}
+@media screen and (max-width:1000px) {
+   
+    form
+    {
+        width: fit-content;
+    }
+    
+    }
