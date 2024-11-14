@@ -2,20 +2,24 @@
 consultar saldo, realizar depósito, realizar retiro, sobregiro de 500.000 */
 import Cuenta from "../js/Cuenta.js"
 class CuentaCorriente extends Cuenta{
-constructor(numeroCuenta=0,saldo=0){
+constructor(numeroCuenta,saldo){
     super(numeroCuenta, saldo)
 this.sobregiro=-500000
 }
-
-realizarTransferencia(saldoTransferir,saldoActual){
-this.saldo=saldoActual
-  /*   if(saldoTransferir<=this.saldo)
-this.saldo-=saldoTransferir  */
- if(saldoActual-saldoTransferir>=this.sobregiro)
-     this.saldo=saldoActual-saldoTransferir
+realizarRetiro(saldoRetirar){
+  if((this.saldo-saldoRetirar)>=this.sobregiro)
+  this.saldo-=saldoRetirar
+  else{
+      alert("Usted no posee la cantidad que trata de retirar")
+      this.saldo=saldoActual
+  }
+  return this.saldo
+  }
+realizarTransferencia(saldoTransferir){
+ if(this.saldo>=saldoTransferir)
+     this.saldo-=saldoTransferir
 else{
 alert("Saldo no disponible")
-this.saldo=saldoActual
 }
 return this.saldo
 

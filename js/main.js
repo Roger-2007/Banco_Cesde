@@ -7,7 +7,8 @@ function generarEnteroAleatorio(min, max) {
    return Math.floor(Math.random() * (max - min)) + min;
  }
  
-/* localStorage.clear() */
+// localStorage.clear() 
+
 
 document.getElementById('formRegistro')?.addEventListener( "submit" , function(event){
    event.preventDefault();
@@ -23,17 +24,13 @@ document.getElementById('formRegistro')?.addEventListener( "submit" , function(e
  const telefono=document.getElementById("telefono").value
  const identificacion=document.getElementById("identificacion").value
     console.log(nombre);
-    localStorage.setItem('usuario', JSON.stringify({ correo, contraseña  }));
-    usuario.push({nombre:nombre, apellido:apellido,correo:correo,direccion:direccion,contraseña:contraseña,identificacion:identificacion,telefono:telefono,cuentas:[]})
+/*     localStorage.setItem('usuario', JSON.stringify({ correo, contraseña  }));
+ */    usuario.push({nombre:nombre, apellido:apellido,correo:correo,direccion:direccion,contraseña:contraseña,identificacion:identificacion,telefono:telefono,cuentas:[]})
     window.location.href = 'iniciarsesion.html';
     localStorage.setItem('usuario', JSON.stringify(usuario));
     
-/*  const datoscliente= new Cliente(nombre,apellido,correo,direccion,contraseña,identificacion,telefono)
- */
+
 });
-
-
-
 
 
 document.getElementById('formInicioSesion')?.addEventListener('submit', function(event) {
@@ -95,7 +92,6 @@ const usuario=JSON.parse(localStorage.getItem('usuario'));
 const correoLogin=JSON.parse(localStorage.getItem('correoLogin'))
 const indice = usuario.findIndex(usuario => usuario.correo === correoLogin);
 const cuentaBuscada = usuario.find(usuario => usuario.correo === correoLogin);
-console.log(cuentaBuscada);
 const nombre=cuentaBuscada.nombre
 const apellido=cuentaBuscada.apellido
 const correo=cuentaBuscada.correo
@@ -129,7 +125,7 @@ if (indice !== -1) {
 
    alert('Su perfil ha sido modificado con exito') 
    window.location.href="perfil.html"   
-
+ 
 }
  else {
    console.log("Usuario no encontrado.");
@@ -224,13 +220,21 @@ cuentaBuscada.cuentas.forEach(cuentas => {
 /* Solo funciona en perfil */
 if (window.location.pathname.includes('perfil.html')) {
 
+const datosCuenta=JSON.parse(localStorage.getItem('cuentaSeleccionada'))
+
+//Hacer una verificacion si la cuenta es de ahorros
+let esCuentaAhorros=(datosCuenta.tipo==='Cuenta de Ahorros')?true:false
+console.log(esCuentaAhorros);
+
+//Agregar los funcionalidad a los botones
 const btnDepositar = document.getElementById('depositar');
 const btnTransferir=document.getElementById('transferir')
 const btnRetirar=document.getElementById('retirar')
- 
+const btnCambiarCuenta=document.getElementById('cambiarCuenta')
 const formDepositar=document.getElementById('formDepositar')
 const formTransferir=document.getElementById('formTransferir')
 const formRetirar=document.getElementById('formRetirar')
+const btnCalcularInteres=document.getElementById('calcularInteres')
 
 function mostrarFormDepositar(){
    formDepositar.style.display='flex';
@@ -252,6 +256,9 @@ function ocultarFormRetirar(){
    formRetirar.style.display='none'
 
 }
+function cambiarCuenta(){
+   window.location.href="gestorCuentas.html"   
+}
 /* Botones de la pagina de perfil */
 btnDepositar?.addEventListener('click',ocultarFormTransferir)
 btnDepositar?.addEventListener('click',mostrarFormDepositar)
@@ -262,101 +269,267 @@ btnTransferir?.addEventListener('click',mostrarFormTransferir)
 btnRetirar?.addEventListener('click',ocultarFormDepositar)
 btnRetirar?.addEventListener('click',ocultarFormTransferir)
 btnRetirar?.addEventListener('click',mostrarFormRetirar) 
+btnCambiarCuenta?.addEventListener('click',cambiarCuenta)
 
 
 
+/* Cuenta de ahorros */
+
+if(esCuentaAhorros){
+   btnTransferir.style.display='none'
 
 /* Depositar */
 
- document.getElementById('formDepositar')?.addEventListener("submit",function(event){
-   event.preventDefault()
+ document.getElementById('formDepositar')?.addEventListener("submit",function(){
    const saldoDepositar=parseInt(document.getElementById('cantDepositar').value)
-   const usuario=JSON.parse(localStorage.getItem('usuario'));
-   const cuentaActual=JSON.parse(localStorage.getItem('cuentaSeleccionada'));
-/*    const cuentaBuscada = usuario.find(usuario => usuario.cuentas.numeroCuenta === cuentaActual.numeroCuenta);
- */   const indice = usuario.findIndex(usuario => usuario.cuentas.numeroCuenta === cuentaActual.numeroCuenta);
-   const cuenta=new Cuenta(cuentaActual.numeroCuenta,cuentaActual.saldo)
-   const nuevoSaldo=cuenta.realizarDeposito(saldoDepositar)
-console.log(nuevoSaldo);
-if (indice !== -1) {
-   usuario[indice].cuentas.saldo = nuevoSaldo; // Actualiza solo los datos pasados en `nuevosDatos`
+/*    const usuario = JSON.parse(localStorage.getItem('usuario'));
+ */   let usuario = JSON.parse(localStorage.getItem('usuario')) || [];
+    let correoLogin = JSON.parse(localStorage.getItem('correoLogin'));
 
-   // Paso 4: Guarda el array actualizado en localStorage
+   const cuentaActual=JSON.parse(localStorage.getItem('cuentaSeleccionada'));
+   const indiceUsuario=usuario.findIndex(usuario=>usuario.correo===correoLogin)
+   console.log(indiceUsuario);
+   console.log(usuario[indiceUsuario].cuentas);
+   const indiceCuenta=usuario[indiceUsuario].cuentas.findIndex(cuenta=>cuenta.numeroCuenta===cuentaActual.numeroCuenta)
+ console.log(indiceCuenta);
+   if (usuario && Array.isArray(usuario.cuentas)) {
+      console.log('Cuentas del usuario:', usuario.cuentas);  // Verifica que el array 'cuentas' esté cargado correctamente
+   }
+   const cuentaAhorros=new CuentaAhorros(usuario[indiceUsuario].cuentas[indiceCuenta].numeroCuenta,usuario[indiceUsuario].cuentas[indiceCuenta].saldo)
+   const nuevoSaldo=cuentaAhorros.realizarDeposito(saldoDepositar)
+ if (indiceUsuario !== -1) {
+   usuario[indiceUsuario].cuentas[indiceCuenta].saldo = nuevoSaldo; // Actualiza solo los datos pasados en `nuevosDatos`
+   let nuevoMovimiento={tipo:'Deposito',valor:saldoDepositar}
+   usuario[indiceUsuario].cuentas[indiceCuenta].movimientos.push(nuevoMovimiento)
+   // Guarda el array actualizado en localStorage
    localStorage.setItem('usuario', JSON.stringify(usuario));
 
-   alert('Su perfil ha sido modificado con exito') 
+   alert('Usted ha depositado con exito') 
 
 }
  else {
-   console.log("Usuario no encontrado.");
- }
+   console.log("Ha ocurrido un error.");
+ }  
+
+})    
+ 
+
+/* Retirar */
+document.getElementById('formRetirar')?.addEventListener('submit',function(){
+   const saldoRetirar=parseInt(document.getElementById('cantRetirar').value)
+ 
+/*    const usuario = JSON.parse(localStorage.getItem('usuario'));
+ */   let usuario = JSON.parse(localStorage.getItem('usuario')) || [];
+ let correoLogin = JSON.parse(localStorage.getItem('correoLogin'));
+
+ const cuentaActual=JSON.parse(localStorage.getItem('cuentaSeleccionada'));
+ const indiceUsuario=usuario.findIndex(usuario=>usuario.correo===correoLogin)
+ console.log(indiceUsuario);
+ console.log(usuario[indiceUsuario].cuentas);
+ const indiceCuenta=usuario[indiceUsuario].cuentas.findIndex(cuenta=>cuenta.numeroCuenta===cuentaActual.numeroCuenta)
+console.log(indiceCuenta);
+
+ const cuentaAhorros=new CuentaAhorros(usuario[indiceUsuario].cuentas[indiceCuenta].numeroCuenta,usuario[indiceUsuario].cuentas[indiceCuenta].saldo)
+ const nuevoSaldo=cuentaAhorros.realizarRetiro(saldoRetirar)
+console.log(nuevoSaldo);
+ if (indiceUsuario !== -1) {
+ usuario[indiceUsuario].cuentas[indiceCuenta].saldo = nuevoSaldo; // Actualiza solo los datos pasados en `nuevosDatos`
+let nuevoMovimiento={tipo:'Retiro',valor:saldoRetirar}
+usuario[indiceUsuario].cuentas[indiceCuenta].movimientos.push(nuevoMovimiento)
+ // Guarda el array actualizado en localStorage
+ localStorage.setItem('usuario', JSON.stringify(usuario));
+
+ alert('Usted ha retirado con exito') 
+
+}
+else {
+ console.log("Ha ocurrido un error.");
+} 
+
+})
+
+
+/* Calcular intereses */
+
+  let usuario = JSON.parse(localStorage.getItem('usuario')) || [];
+ let correoLogin = JSON.parse(localStorage.getItem('correoLogin'));
+
+ const cuentaActual=JSON.parse(localStorage.getItem('cuentaSeleccionada'));
+ const indiceUsuario=usuario.findIndex(usuario=>usuario.correo===correoLogin)
+ const indiceCuenta=usuario[indiceUsuario].cuentas.findIndex(cuenta=>cuenta.numeroCuenta===cuentaActual.numeroCuenta)
+
+ const cuentaAhorros=new CuentaAhorros(usuario[indiceUsuario].cuentas[indiceCuenta].numeroCuenta,usuario[indiceUsuario].cuentas[indiceCuenta].saldo)
+
+ const totalIntereses=cuentaAhorros.calcularInteres()
+ console.log(totalIntereses);
+
+
+/* Consultar saldo */
+const btnConsultarSaldo=document.getElementById('consultarSaldo')
+btnConsultarSaldo?.addEventListener('click',function(){
+     let usuario = JSON.parse(localStorage.getItem('usuario')) || [];
+   let correoLogin = JSON.parse(localStorage.getItem('correoLogin'));
+  
+   const cuentaActual=JSON.parse(localStorage.getItem('cuentaSeleccionada'));
+   const indiceUsuario=usuario.findIndex(usuario=>usuario.correo===correoLogin)
+   console.log(indiceUsuario);
+   console.log(usuario[indiceUsuario].cuentas);
+   const indiceCuenta=usuario[indiceUsuario].cuentas.findIndex(cuenta=>cuenta.numeroCuenta===cuentaActual.numeroCuenta)
+  console.log(indiceCuenta);
+  
+   const cuentaAhorros=new CuentaAhorros(usuario[indiceUsuario].cuentas[indiceCuenta].numeroCuenta,usuario[indiceUsuario].cuentas[indiceCuenta].saldo)
+     document.getElementById('saldoDisponible').innerText=cuentaAhorros.consultarSaldo() 
+})
+}
+
+/* Cuenta Corriente */
+
+else{
+   btnCalcularInteres.style.display='none'
+
+   /* Depositar */
+
+ document.getElementById('formDepositar')?.addEventListener("submit",function(){
+   const saldoDepositar=parseInt(document.getElementById('cantDepositar').value)
+/*    const usuario = JSON.parse(localStorage.getItem('usuario'));
+ */   let usuario = JSON.parse(localStorage.getItem('usuario')) || [];
+    let correoLogin = JSON.parse(localStorage.getItem('correoLogin'));
+
+   const cuentaActual=JSON.parse(localStorage.getItem('cuentaSeleccionada'));
+   const indiceUsuario=usuario.findIndex(usuario=>usuario.correo===correoLogin)
+   console.log(indiceUsuario);
+   console.log(usuario[indiceUsuario].cuentas);
+   const indiceCuenta=usuario[indiceUsuario].cuentas.findIndex(cuenta=>cuenta.numeroCuenta===cuentaActual.numeroCuenta)
+ console.log(indiceCuenta);
+   if (usuario && Array.isArray(usuario.cuentas)) {
+      console.log('Cuentas del usuario:', usuario.cuentas);  // Verifica que el array 'cuentas' esté cargado correctamente
+   }
+   const cuentaCorriente=new CuentaCorriente(usuario[indiceUsuario].cuentas[indiceCuenta].numeroCuenta,usuario[indiceUsuario].cuentas[indiceCuenta].saldo)
+   const nuevoSaldo=cuentaCorriente.realizarDeposito(saldoDepositar)
+ if (indiceUsuario !== -1) {
+   usuario[indiceUsuario].cuentas[indiceCuenta].saldo = nuevoSaldo; // Actualiza solo los datos pasados en `nuevosDatos`
+   let nuevoMovimiento={tipo:'Deposito',valor:saldoDepositar}
+   usuario[indiceUsuario].cuentas[indiceCuenta].movimientos.push(nuevoMovimiento)
+   // Guarda el array actualizado en localStorage
+   localStorage.setItem('usuario', JSON.stringify(usuario));
+
+   alert('Usted ha depositado con exito') 
+
+}
+ else {
+   console.log("Ha ocurrido un error.");
+ }  
+
+})    
+ 
+
+/* Retirar */
+document.getElementById('formRetirar')?.addEventListener('submit',function(){
+   const saldoRetirar=parseInt(document.getElementById('cantRetirar').value)
+ 
+/*    const usuario = JSON.parse(localStorage.getItem('usuario'));
+ */   let usuario = JSON.parse(localStorage.getItem('usuario')) || [];
+ let correoLogin = JSON.parse(localStorage.getItem('correoLogin'));
+
+ const cuentaActual=JSON.parse(localStorage.getItem('cuentaSeleccionada'));
+ const indiceUsuario=usuario.findIndex(usuario=>usuario.correo===correoLogin)
+ console.log(indiceUsuario);
+ console.log(usuario[indiceUsuario].cuentas);
+ const indiceCuenta=usuario[indiceUsuario].cuentas.findIndex(cuenta=>cuenta.numeroCuenta===cuentaActual.numeroCuenta)
+console.log(indiceCuenta);
+
+ const cuentaCorriente=new CuentaCorriente(usuario[indiceUsuario].cuentas[indiceCuenta].numeroCuenta,usuario[indiceUsuario].cuentas[indiceCuenta].saldo)
+ const nuevoSaldo=cuentaCorriente.realizarRetiro(saldoRetirar)
+console.log(nuevoSaldo);
+ if (indiceUsuario !== -1) {
+ usuario[indiceUsuario].cuentas[indiceCuenta].saldo = nuevoSaldo; // Actualiza solo los datos pasados en `nuevosDatos`
+let nuevoMovimiento={tipo:'Retiro',valor:saldoRetirar}
+usuario[indiceUsuario].cuentas[indiceCuenta].movimientos.push(nuevoMovimiento)
+ // Guarda el array actualizado en localStorage
+ localStorage.setItem('usuario', JSON.stringify(usuario));
+
+ alert('Usted ha retirado con exito') 
+
+}
+else {
+ console.log("Ha ocurrido un error.");
+} 
 
 })
 
 /* Transferir */
 
-document.getElementById('formTransferir')?.addEventListener("submit",function(){
-   const cuentaCorriente=new CuentaCorriente()
-
+document.getElementById('formTransferir')?.addEventListener('submit',function(event){
+event.preventDefault()
+   const personaTransferir=parseInt(document.getElementById('personaTransferir').value)
    const saldoTransferir=parseInt(document.getElementById('cantTransferir').value)
- /* const saldoActual=parseInt(localStorage.getItem('saldo')||0)||0
-   const nuevoSaldo=parseInt(cuentaCorriente.realizarTransferencia(saldoTransferir,saldoActual)) */
-   const usuario=JSON.parse(localStorage.getItem('usuario'));
+
+   const usuario=JSON.parse(localStorage.getItem('usuario'))
+   const correoLogin=JSON.parse(localStorage.getItem('correoLogin'))
    const cuentaActual=JSON.parse(localStorage.getItem('cuentaSeleccionada'));
-   const cuentaBuscada = usuario.find(usuario => usuario.cuentas.numeroCuenta === cuentaActual.numeroCuenta);
-   const cuenta=new Cuenta(cuentaBuscada)
-   nuevoSaldo=cuenta.realizarDeposito(saldoTransferir)
-   console.log(nuevoSaldo);
-
-
-})
-
-/* Retirar */
-document.getElementById('formRetirar')?.addEventListener('submit',function(){
-   const cuenta=new Cuenta()
-   const saldoRetirar=parseInt(document.getElementById('cantRetirar').value)
+   const cuentaTransferir=null
+   
+   usuario.forEach((usuario) => {
+      usuario.cuentas.forEach((cuenta) => {
+         if (cuenta.numeroCuenta === personaTransferir) {
+           cuentaTransferir = cuenta;  // Si encontramos la cuenta, la asignamos
+         }
+       });
+    });
+    console.log(cuentaTransferir);
+     /*  const indiceUsuarioTransferir=usuario.findIndex(usuario=>usuario.cuentas.numeroCuenta===personaTransferir)
  
-const saldoActual=parseInt(localStorage.getItem('saldo')||0)||0
-const nuevoSaldo=parseInt(cuenta.realizarRetiro(saldoRetirar,saldoActual))
-console.log(nuevoSaldo);
+   
+   const indiceCuentaTransferir=usuario[indiceUsuarioTransferir].cuentas.findIndex(cuenta=>cuenta.numeroCuenta===cuentaActual.numeroCuenta)
+   const indiceUsuario=usuario.findIndex(usuario=>usuario.correo===correoLogin)
+   const indiceCuenta=usuario[indiceUsuario].cuentas.findIndex(cuenta=>cuenta.numeroCuenta===cuentaActual.numeroCuenta) */
+  
+  
+  /*  const cuentaCorriente=new CuentaCorriente(usuario[indiceUsuario].cuentas[indiceCuenta].numeroCuenta,usuario[indiceUsuario].cuentas[indiceCuenta].saldo)
+const dineroTransferido=cuentaCorriente.realizarTransferencia(saldoTransferir) */
 
-
-localStorage.setItem('saldo', JSON.stringify(nuevoSaldo));
-const tipoMovimiento="retiro"
-
-localStorage.setItem('tipoMovimiento', JSON.stringify( tipoMovimiento));
-localStorage.setItem('cantidadMovimiento', JSON.stringify(saldoRetirar));
 
 })
+
 
 /* Consultar saldo */
 const btnConsultarSaldo=document.getElementById('consultarSaldo')
 btnConsultarSaldo?.addEventListener('click',function(){
-   const usuario=JSON.parse(localStorage.getItem('usuario'));
+     let usuario = JSON.parse(localStorage.getItem('usuario')) || [];
+   let correoLogin = JSON.parse(localStorage.getItem('correoLogin'));
+  
    const cuentaActual=JSON.parse(localStorage.getItem('cuentaSeleccionada'));
-   const cuentaBuscada = usuario.cuentas.find(cuenta => cuenta.numeroCuenta === cuentaActual.numeroCuenta);
-   
-      console.log(cuentaActual.numeroCuenta);
-console.log(cuentaBuscada);
-    const cuenta=new Cuenta()
-     document.getElementById('saldoDisponible').innerText=cuenta.consultarSaldo() 
+   const indiceUsuario=usuario.findIndex(usuario=>usuario.correo===correoLogin)
+   console.log(indiceUsuario);
+   console.log(usuario[indiceUsuario].cuentas);
+   const indiceCuenta=usuario[indiceUsuario].cuentas.findIndex(cuenta=>cuenta.numeroCuenta===cuentaActual.numeroCuenta)
+  console.log(indiceCuenta);
+  
+   const cuentaCorriente=new CuentaCorriente(usuario[indiceUsuario].cuentas[indiceCuenta].numeroCuenta,usuario[indiceUsuario].cuentas[indiceCuenta].saldo)
+     document.getElementById('saldoDisponible').innerText=cuentaCorriente.consultarSaldo() 
 })
+}
 
-/* localStorage.getItem('usuario',JSON.stringify({nombre?,}))
- */
+
 
 /* Mostrar movimiento */
 const btnMovimiento=document.getElementById('btnMostrarMovimiento')
 btnMovimiento?.addEventListener('click',function(){
+    let usuario = JSON.parse(localStorage.getItem('usuario')) || [];
+   let correoLogin = JSON.parse(localStorage.getItem('correoLogin'));
+  
+   const cuentaActual=JSON.parse(localStorage.getItem('cuentaSeleccionada'));
+   const indiceUsuario=usuario.findIndex(usuario=>usuario.correo===correoLogin)
+   const indiceCuenta=usuario[indiceUsuario].cuentas.findIndex(cuenta=>cuenta.numeroCuenta===cuentaActual.numeroCuenta)
+
+   
    const contenedor = document.getElementById("mostrarDatosMovimiento");
    contenedor.innerHTML=``
-   const usuario=JSON.parse(localStorage.getItem('usuario'));
 
-   usuario.forEach(usuario => {
+   usuario[indiceUsuario].cuentas[indiceCuenta].movimientos.forEach(usuario => {
      contenedor.innerHTML += `
        <div>
-         <p>Su ultimo movimiento fue de: ${usuario.tipoMovimiento} y fue de un valor de $${usuario.valor}</p>
-         ${tipoMovimiento}${numeroEntrada}
+         <p>Usted realizo un ${usuario.tipo} de un valor de $${usuario.valor}</p>
          
        </div>
        <hr>
@@ -364,12 +537,5 @@ btnMovimiento?.addEventListener('click',function(){
    });
  
  
- 
- 
-   /*   const ahorros=new CuentaAhorros()
-   const movimiento = JSON.parse(localStorage.getItem('tipoMovimiento'));
-   const valormovimiento = JSON.parse(localStorage.getItem('cantidadMovimiento'));
-
-   document.getElementById('mostrarDatosMovimiento').innerText=ahorros.mostrarMovimiento(movimiento,valormovimiento) */
 })
 }

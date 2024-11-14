@@ -4,10 +4,14 @@ intereses.  */
 consultar saldo, realizar depósito, realizar retiro, consultar movimientos. */
 import Cuenta from "../js/Cuenta.js"
 class CuentaAhorros extends Cuenta{
-constructor(numeroCuenta=0,saldo=0){
+constructor(numeroCuenta,saldo){
 super(numeroCuenta,saldo)
+this.tasaInteres=0.04
 }
-mostrarMovimiento(tipoMovimiento,numeroEntrada){
-return `Su ultimo movimiento fue de ${tipoMovimiento} y fue de un valor de $${numeroEntrada}`
+
+calcularInteres(){
+return this.saldo*(1+this.tasaInteres/12)**(12*(1/12))
 }
+
+
 }export default CuentaAhorros
