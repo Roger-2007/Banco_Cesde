@@ -10,7 +10,7 @@ this.tasaInteres=0.04
 }
 
 calcularInteres(){
-return this.saldo*(1+this.tasaInteres/12)**(12*(1/12))
+return this.saldo*(1+this.tasaInteres/1)**(12*(1/12))
 }
 
 

@@ -16,8 +16,10 @@ realizarRetiro(saldoRetirar){
   return this.saldo
   }
 realizarTransferencia(saldoTransferir){
- if(this.saldo>=saldoTransferir)
+ if(this.saldo>=saldoTransferir){
      this.saldo-=saldoTransferir
+    alert("Se realizo la transferencia con exito")
+}
 else{
 alert("Saldo no disponible")
 }

@@ -180,6 +180,12 @@ margin-bottom: .3125rem;
     min-height: fit-content;
     font-size: 30px;
 }
+#mostrarInteres{
+    margin: 20px 0;
+}
+#mostrarInteres li{
+margin: 5px 0;
+}
 #formDepositar{
     display: none;
     gap: 20px 0;
