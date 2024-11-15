@@ -526,10 +526,11 @@ event.preventDefault()
    /* Datos de la cuenta para hacerle transferencia */
 
    const indiceUsuarioTransferir=usuario.findIndex(usuario=>usuario.cuentas.find(cuenta=>cuenta.numeroCuenta===personaTransferir))
- let usuarioTransferir=usuario.find(usuario=>usuario.cuentas.find(cuenta=>cuenta.numeroCuenta===personaTransferir))
-   let indiceCuentaTransferir=usuario[indiceUsuarioTransferir].cuentas.findIndex(usuario=> usuario.numeroCuenta===personaTransferir);
+   let indiceCuentaTransferir=null
+ if(indiceUsuarioTransferir!==-1){
+  indiceCuentaTransferir=usuario[indiceUsuarioTransferir].cuentas.findIndex(usuario=> usuario.numeroCuenta===personaTransferir);
 
-  
+  if (cuentaActual.numeroCuenta!==usuario[indiceUsuarioTransferir].cuentas[indiceCuentaTransferir].numeroCuenta){
   if(indiceCuentaTransferir!==-1){
   const cuentaCorriente=new CuentaCorriente(usuario[indiceUsuario].cuentas[indiceCuenta].numeroCuenta,usuario[indiceUsuario].cuentas[indiceCuenta].saldo)
 const nuevoSaldo=cuentaCorriente.realizarTransferencia(saldoTransferir) 
@@ -549,8 +550,13 @@ localStorage.setItem('usuario', JSON.stringify(usuario));
 location.reload();
 
 }}
+
+}else{
+   alert("No puedes hacer una transferencia a esta misma cuenta")
+}}
 else{
    alert("El numero de cuenta que ingreso no existe")
+
 }
 })
 
